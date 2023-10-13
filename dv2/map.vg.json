@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Renewables energy consumption in Europe, kWh per capita (2010-2019)",
+  "width":  900,
+  "height": 500,
+  "projection": {
+    "type": "equirectangular",
+    "scale": 500,
+    "translate": [1400, 660],
+    "center": [130, 10]
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2019,
+        "step": 1,
+        "name": "Year:  "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/TopoJSON/europe.topojson",
+        "format": {"type": "topojson", "feature": "europe"}
+      },
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ddd",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {"tooltip": {"field": "note"}}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/deslliew/FIT3179/main/test.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Jason1205-ui/fit3179/main/dataset/data_2010-2019.csv"
+      },
+      "transform": [
+        {
+          "lookup": "country",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/TopoJSON/europe.topojson",
+              "format": {"type": "topojson", "feature": "europe"}
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {"filter": "datum.year == Year_selection"},
+        {"calculate": "toNumber(datum.renewables_elec_per_capita) + toNumber(datum.low_carbon_elec_per_capita)",
+      "as": "total"}
+     
+      ],
+      "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "color": {
+          "field": "total",
+          "type": "quantitative",
+          "scale": {"type":"log","domain": [100,200000], "scheme": "yellowgreenblue"},
+          "legend": {"format": ".2s", "title": "Energy consumed (per capita)"}
+        },
+        "tooltip": [
+          {"field": "year", "type": "nominal", "title": "Year"},
+          {"field": "country", "type": "nominal", "title": "Country"},
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "Renewable energy consumption, kWh per capita",
+            "format": ",.2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Jason1205-ui/fit3179/main/dataset/data_2010-2019.csv"
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dy": 0,
+        "fontSize": 14,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "  datum['country'] == 'Russia' || datum['country'] == 'Finland' || datum['country'] == 'Greece' || datum['country'] == 'Norway' || datum['country'] == 'United Kingdom'","value": 1
+            },
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {}
+}
