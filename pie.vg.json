@@ -44,7 +44,15 @@
       "title": "Energy Source",
       "type": "nominal",
       "scale": {
-          "domain": ["Hydroelectric" , "Solar", "Wind", "Biofuel","Others"]
+          "domain": ["Hydroelectric" , "Solar", "Wind", "Biofuel","Others"],
+          "range": [
+            "#8da0cb",
+            "#fc8d62",
+            "#a6d854",
+            "#66c2a5",
+            "#e5c494",
+            "#b3b3b3"
+          ]
         }
   
       },
@@ -61,7 +69,7 @@
       {
         "mark": {
           "type": "arc",
-          "innerRadius": 160,
+          "innerRadius": 180,
           "outerRadius": 110,
           "stroke": "white",
           "strokeWidth": 2,
@@ -72,7 +80,7 @@
         "mark": {
           "type": "text",
           "align": "center",
-          "outerRadius": 185,
+          "outerRadius": 205,
           "fontSize": 14,
           "fontStyle": "italic"
         },
@@ -84,7 +92,41 @@
           },
           "opacity": {"value": 1}
         }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "x": 420,
+          "y": 420,
+          "fill": "#fc8d62",
+          "fontSize": 15,
+          "text": "Solar energy"
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "x": 420,
+          "y": 440,
+          "fill": "black",
+          "fontSize": 15,
+          "text": "increased from 2.12%"
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "x": 420,
+          "y": 460,
+          "fill": "black",
+          "fontSize": 15,
+          "text": "to 9.24% in 2019"
+        }
       }
+
       
     ]
         

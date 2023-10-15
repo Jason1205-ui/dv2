@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Renewables energy consumption in Europe, per capita (2010-2019)",
-  "width": 900,
-  "height": 500,
+  "title": "Renewables energy consumption in Europe, kWh per capita (2010-2019)",
+  "width":  1200,
+  "height": 700,
   "projection": {
     "type": "equirectangular",
-    "scale": 500,
-    "translate": [1400, 660],
-    "center": [130, 10]
+    "scale": 700,
+    "translate": [1500, 660],
+    "center": [80, 30]
   },
   "params": [
     {
@@ -85,8 +85,8 @@
           {
             "field": "total",
             "type": "quantitative",
-            "title": "Renewable energy consumption, per capita",
-            "format": ","
+            "title": "Renewable energy consumption, kWh per capita",
+            "format": ",.2f"
           }
         ]
       }
@@ -99,7 +99,7 @@
         "type": "text",
         "align": "center",
         "baseline": "middle",
-        "dx": 0,
+        "dy": 0,
         "fontSize": 14,
         "fontStyle": "italic"
       },
@@ -116,6 +116,6 @@
         }
       }
     }
-  ],
-  "config": {}
+  ]
+  
 }
