@@ -133,7 +133,8 @@
           "scale":{"type": "linear","domain":[-5,5]}
         },
         "tooltip": [
-          {"field": "avg_percentage_increase", "type": "quantitative", "format": ",.2f", "title": "Change In Primary Energy Consumption (%)"}
+          {"field": "avg_percentage_increase", "type": "quantitative", "format": ",.2f", "title": "Change In Primary Energy Consumption (%)"},
+          {"field": "year", "type": "ordinal", "title": "Year"}
         ]
       }
     },
@@ -149,7 +150,8 @@
         },
 
         "tooltip": [
-            {"field": "population", "type": "quantitative","format":",", "title": "Estimated Population"}
+            {"field": "population", "type": "quantitative","format":",", "title": "Estimated Population"},
+            {"field": "year", "type": "ordinal", "title": "Year"}
           
 
           ]
